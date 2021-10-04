@@ -5,4 +5,5 @@ for (let word of dictionary) {
     }
 }
 
-console.log(all6Words)
+let rootWord = all6Words[Math.floor(Math.random() * (all6Words.length+1))]
+console.log(rootWord)
