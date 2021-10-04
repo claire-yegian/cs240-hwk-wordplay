@@ -6,8 +6,13 @@ for (let word of dictionary) {
 }
 
 let rootWord = all6Words[Math.floor(Math.random() * (all6Words.length+1))]
-let chars = rootWord.split("")
 let subWords = []
+let all3to6 = []
+for (let word of dictionary) {
+    if (word.length >= 3 && word.length <= 6) {
+        all3to6.push(word)
+    }
+}
 
 function builtOf (word, characters) {
     let tempWord = word
@@ -19,5 +24,11 @@ function builtOf (word, characters) {
         subWords.push(word)
     }
 }
-builtOf('tapas', ['t','a','p','s','a','j','o'])
+
+console.log(rootWord)
+for (let item of all3to6) {
+    if (rootWord.split("").includes(item.charAt(0))) {
+        builtOf (item,rootWord.split(""))
+    }
+}
 console.log(subWords)
