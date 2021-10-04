@@ -6,10 +6,6 @@ for (let word of dictionary) {
     }
 }
 
-<<<<<<< HEAD
-let rootWord = all6Words[Math.floor(Math.random() * (all6Words.length+1))]
-console.log(rootWord)
-=======
 //generate random root word
 let rootWord = all6Words[Math.floor(Math.random() * (all6Words.length+1))]
 
@@ -42,4 +38,18 @@ for (let item of all3to6) {
         builtOf (item,rootWord)
     }
 }
->>>>>>> subset
+
+//function to shuffle the word
+function shuffle (toShuffle) {
+    array = toShuffle.split("")
+    for (let i = 0; i < array.length; i++) {
+        let rand1 = Math.floor(Math.random() * (array.length))
+        let rand2 = Math.floor(Math.random() * (array.length))
+        let temp = array[rand1]
+        array[rand1] = array[rand2]
+        array[rand2] = temp
+    }
+    return array.join("")
+}
+console.log(rootWord)
+console.log(shuffle(rootWord))
