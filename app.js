@@ -69,11 +69,13 @@ let shuffled = shuffle(rootWord)
 //user interaction
 let numGuessed = 0
 while (numGuessed < subWords.length) {
-    console.clear();
+    console.clear()
+    console.log(rootWord)
     console.log('Available letters: '+shuffled)
     console.log(allBlanks.join('\n'))
-    let input = prompt('Enter a guess:');
-    if (input == '*') {
+    let input = prompt('Enter a guess:')
+    if (input === null) {break}
+    else if (input == '*') {
         alert('Shuffling root word...')
         shuffled = shuffle(rootWord)
     }
@@ -89,19 +91,25 @@ while (numGuessed < subWords.length) {
         }
         else if (subWords.includes(input.toLowerCase())) {
             alert('Correct!')
+            numGuessed++
             let index = subWords.indexOf(input.toLowerCase())
             allBlanks[index] = subWords[index]
-            console.log('Available letters: '+shuffled)
-            console.log(allBlanks.join('\n'))
+            // console.log('Available letters: '+shuffled)
+            // console.log(allBlanks.join('\n'))
         }
         else {
-            alert(input.toLowerCase()+' is not a word!')
+            alert(input+' is not a word!')
         }
     }
 }
 
 //congratulate user if they won, give answers if they lost
-// if (numGuessed < subWords.length) {
-//     console.log('you answered '+numGuessed+' out of '+subWords.length)
-//     console.log(subWords.join('\n'))
-// }
+if (numGuessed < subWords.length) {
+    alert('Better luck next time!')
+}
+else if (numGuessed == subWords.length) {
+    alert('Congrats! You guessed all of the words.')
+}
+console.clear()
+console.log('You answered '+numGuessed+' out of '+subWords.length+'!')
+console.log(subWords.join('\n'))
