@@ -51,5 +51,18 @@ function shuffle (toShuffle) {
     }
     return array.join("")
 }
-console.log(rootWord)
-console.log(shuffle(rootWord))
+
+//function to convert subset words to blanks
+let allBlanks = []
+for (let item of subWords) {
+    let chars = item.split("")
+    let blanks = []
+    for (let i = 0; i < chars.length; i++) {
+        blanks.push('_')
+    }
+    allBlanks.push(blanks.join(' '))
+}
+
+//print intial message to user
+console.log('Available letters: '+shuffle(rootWord))
+console.log(allBlanks.join('\n'))
