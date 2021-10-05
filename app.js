@@ -1,4 +1,4 @@
-//create a list of all 6 letter words
+/* Create a list of all 6 letter words */
 let all6Words = []
 for (let word of dictionary) {
     if (word.length == 6) {
@@ -6,11 +6,11 @@ for (let word of dictionary) {
     }
 }
 
-//generate random root word
+/* Generate random root word */
 let rootWord = all6Words[Math.floor(Math.random() * (all6Words.length+1))]
 
-//set up for finding subset words: find all 3-6 letter words, create empty list 
-//of subset words
+/* Set up for finding subset words: find all 3-6 letter words, create empty list 
+of subset words */
 let subWords = []
 let all3to6 = []
 for (let word of dictionary) {
@@ -19,7 +19,7 @@ for (let word of dictionary) {
     }
 }
 
-//function to find if any word is a subset of another
+/* Function to find if any word is a subset of another */
 function builtOf (subWord, word) {
     let characters = word.split("")
     let tempWord = subWord
@@ -32,14 +32,14 @@ function builtOf (subWord, word) {
     }
 }
 
-//loop to find all subset words of the root word
+/* Loop to find all subset words of the root word */
 for (let item of all3to6) {
     if (rootWord.split("").includes(item.charAt(0))) {
         builtOf (item,rootWord)
     }
 }
 
-//function to shuffle the word
+/* Function to shuffle the root word */
 function shuffle (toShuffle) {
     array = toShuffle.split("")
     for (let i = 0; i < array.length; i++) {
@@ -52,7 +52,7 @@ function shuffle (toShuffle) {
     return array.join("")
 }
 
-//function to convert subset words to blanks
+/* Function to convert subset words to blanks */
 let allBlanks = []
 for (let item of subWords) {
     let chars = item.split("")
@@ -63,47 +63,45 @@ for (let item of subWords) {
     allBlanks.push(blanks.join(' '))
 }
 
-//print intial message to user
-let shuffled = shuffle(rootWord)
 
-//user interaction
+/* User interaction: gets user input, determines if it's a correct answer, and
+outputs appropriate messages based on the input. Clears console and maintains 
+up-to-date game display */
+let shuffled = shuffle(rootWord)
 let numGuessed = 0
-while (numGuessed < subWords.length) {
+while (numGuessed < subWords.length) { //while the user hasn't guessed all words
     console.clear()
-    console.log(rootWord)
     console.log('Available letters: '+shuffled)
     console.log(allBlanks.join('\n'))
     let input = prompt('Enter a guess:')
-    if (input === null) {break}
-    else if (input == '*') {
+    if (input === null) {break} //if they've hit cancel
+    else if (input == '*') { //if they entered '*' to shuffle
         alert('Shuffling root word...')
         shuffled = shuffle(rootWord)
     }
     else {
-        if (allBlanks.includes(input.toLowerCase())) {
+        if (allBlanks.includes(input.toLowerCase())) { //already found
             alert(input.toLowerCase()+' has already been found')
         }
-        else if (input.length > 6 || input.length < 3) {
+        else if (input.length > 6 || input.length < 3) { //too short/long
             alert(input.toLowerCase()+' is too short or long. Must be 3 to 6 letters long')
         }
-        else if (!dictionary.includes(input.toLowerCase())) {
+        else if (!dictionary.includes(input.toLowerCase())) { //not a word
             alert(input.toLowerCase()+' is not a valid English word')
         }
-        else if (subWords.includes(input.toLowerCase())) {
+        else if (subWords.includes(input.toLowerCase())) { //they got one right
             alert('Correct!')
             numGuessed++
             let index = subWords.indexOf(input.toLowerCase())
             allBlanks[index] = subWords[index]
-            // console.log('Available letters: '+shuffled)
-            // console.log(allBlanks.join('\n'))
         }
-        else {
+        else { //a valid word, but not an answer
             alert(input+' is not a word!')
         }
     }
 }
 
-//congratulate user if they won, give answers if they lost
+/* Congratulate user if they won, give answers if they lost */
 if (numGuessed < subWords.length) {
     alert('Better luck next time!')
 }
