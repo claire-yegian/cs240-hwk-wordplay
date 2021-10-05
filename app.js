@@ -64,5 +64,34 @@ for (let item of subWords) {
 }
 
 //print intial message to user
-console.log('Available letters: '+shuffle(rootWord))
-console.log(allBlanks.join('\n'))
+let shuffled = shuffle(rootWord)
+
+//user interaction
+let numGuessed = 0
+while (numGuessed < subWords.length) {
+    console.clear();
+    console.log('Available letters: '+shuffled)
+    console.log(allBlanks.join('\n'))
+    let input = prompt('Enter a guess:');
+    if (input == '*') {
+        console.log('Available letters: '+shuffle(rootWord)) //bug
+        console.log(allBlanks.join('\n'))
+    }
+    else {
+        if (subWords.includes(input.toLowerCase())) {
+            let index = subWords.indexOf(input.toLowerCase())
+            allBlanks[index] = subWords[index]
+            console.log('Available letters: '+shuffled)
+            console.log(allBlanks.join('\n'))
+        }
+        else {
+            alert(input.toLowerCase()+' is not a word!')
+        }
+    }
+}
+
+//congratulate user if they won, give answers if they lost
+// if (numGuessed < subWords.length) {
+//     console.log('you answered '+numGuessed+' out of '+subWords.length)
+//     console.log(subWords.join('\n'))
+// }
