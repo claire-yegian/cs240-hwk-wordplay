@@ -74,11 +74,21 @@ while (numGuessed < subWords.length) {
     console.log(allBlanks.join('\n'))
     let input = prompt('Enter a guess:');
     if (input == '*') {
-        console.log('Available letters: '+shuffle(rootWord)) //bug
-        console.log(allBlanks.join('\n'))
+        alert('Shuffling root word...')
+        shuffled = shuffle(rootWord)
     }
     else {
-        if (subWords.includes(input.toLowerCase())) {
+        if (allBlanks.includes(input.toLowerCase())) {
+            alert(input.toLowerCase()+' has already been found')
+        }
+        else if (input.length > 6 || input.length < 3) {
+            alert(input.toLowerCase()+' is too short or long. Must be 3 to 6 letters long')
+        }
+        else if (!dictionary.includes(input.toLowerCase())) {
+            alert(input.toLowerCase()+' is not a valid English word')
+        }
+        else if (subWords.includes(input.toLowerCase())) {
+            alert('Correct!')
             let index = subWords.indexOf(input.toLowerCase())
             allBlanks[index] = subWords[index]
             console.log('Available letters: '+shuffled)
